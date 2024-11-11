@@ -16,6 +16,7 @@
     "plugins": [
         "react"
     ],
-    "rules": {
+    "rules": {  
+        "linebreak-style": ["error", "windows"]  
     }
 }
