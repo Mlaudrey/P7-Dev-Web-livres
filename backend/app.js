@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const stuffRoutes = require('./routes/stuff.js');
+const userRoutes = require('./routes/user.js');
+const user = require('./models/user.js');
 
 mongoose.connect('mongodb+srv://audrey:mlKjyT@cluster0.oxi2m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
     { useNewUrlParser: true,
@@ -20,8 +22,9 @@ app.use((req, res, next) => {
     next();
   });
  
-app.use(express.json());
+app.use(bodyParser.json());
 
 app.use('/api/stuff', stuffRoutes);
+app.use('/api/auth', userRoutes);
 
 module.exports= app;
