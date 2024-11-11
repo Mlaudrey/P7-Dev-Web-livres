@@ -30,18 +30,22 @@ app.get('/api/stuff', (req, res, next) => {
         {
             _id: 'oiuytr',
             title: 'mon premier livre',
-            description: 'Les infos du premier livre',
+            author: 'Les infos du premier livre',
             imageUrl:'',
-            Note:'',
-            userId:'gegzffz',
+            year:'',
+            genre:'',
+            rating:'',
+            avarageRating:'',
         },
         {
             _id: 'oiuytrteb',
             title: 'mon deuxième livre',
-            description: 'Les infos du deuxième livre',
+            author: 'Les infos du deuxième livre',
             imageUrl:'',
-            Note:'',
-            userId:'gegzffz',
+            year:'',
+            genre:'',
+            rating:'',
+            avarageRating:'',
         },
     ];
     res.status(200).json(stuff);
