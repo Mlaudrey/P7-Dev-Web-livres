@@ -1,6 +1,6 @@
 // in controllers/stuff.js
 
-const Thing = require('../models/Thing');
+const Thing = require('../models/book');
 const fs = require('fs');
 
 exports.createThing = (req, res, next) => {
