@@ -29,4 +29,12 @@ app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
+// Middleware de gestion des erreurs
+app.use((error, req, res, next) => {
+  console.error(error.stack); 
+  res.status(error.status || 500).json({
+    message: error.message || 'Une erreur serveur est survenue'
+  });
+});
+
 module.exports= app;
