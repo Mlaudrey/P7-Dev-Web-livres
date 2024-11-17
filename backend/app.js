@@ -3,33 +3,41 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 
-const stuffRoutes = require('./routes/stuff.js');
-const userRoutes = require('./routes/user.js');
-const user = require('./models/user.js');
+// je charge les variables d'environnement depuis le fichier .env
+require('dotenv').config(); 
 
-mongoose.connect('mongodb+srv://audrey:mlKjyT@cluster0.oxi2m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
-    { useNewUrlParser: true,
-      useUnifiedTopology: true })
+const bookRoutes = require('./routes/book.js'); 
+const userRoutes = require('./routes/user.js');  
+
+// j'utilise la variable d'environnement MONGODB_URI pour se connecter à MongoDB
+mongoose.connect(process.env.MONGODB_URI, 
+    { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-
 const app = express();
 
+// middleware pour les en-têtes CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
-  });
- 
+});
+
+// middleware pour parser le corps des requêtes en JSON
 app.use(bodyParser.json());
 
-app.use('/api/stuff', stuffRoutes);
-app.use('/api/auth', userRoutes);
-app.use('/images', express.static(path.join(__dirname, 'images')))
+// routes pour les livres 
+app.use('/api/books', bookRoutes);
 
-// Middleware de gestion des erreurs
+// routes pour l'authentification des utilisateurs
+app.use('/api/auth', userRoutes);
+
+// route pour servir les fichiers d'images statiques
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+// middleware global de gestion des erreurs
 app.use((error, req, res, next) => {
   console.error(error.stack); 
   res.status(error.status || 500).json({
@@ -37,4 +45,4 @@ app.use((error, req, res, next) => {
   });
 });
 
-module.exports= app;
+module.exports = app;
