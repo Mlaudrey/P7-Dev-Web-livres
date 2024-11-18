@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
-const bcrypt = require('bcryptjs');  //  hachage du mot de passe
+const bcrypt = require('bcryptjs');  
 
 const userSchema = mongoose.Schema({
   email: { type: String, required: true, unique: true },
@@ -14,8 +14,8 @@ userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next(); // Si le mot de passe n'est pas modifié, ne rien faire
 
   try {
-    const salt = await bcrypt.genSalt(10);  // Générer un salt pour rendre le hachage plus sécurisé
-    this.password = await bcrypt.hash(this.password, salt);  // Hacher le mot de passe avec le salt
+   // const salt = await bcrypt.genSalt(10);  // Générer un salt pour rendre le hachage plus sécurisé
+    this.password = await bcrypt.hash(this.password, 10);  // Hacher le mot de passe avec le salt
     next();
   } catch (err) {
     next(err);

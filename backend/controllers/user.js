@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const passwordValidator = require("password-validator");
@@ -62,12 +62,16 @@ exports.login = async (req, res) => {
   try {
     // recherche de l'utilisateur
     const user = await User.findOne({ email });
+    console.log('user:', user)
     if (!user) {
       return res.status(401).json({ error: "Utilisateur ou mot de passe incorrect." });
     }
 
     // comparaison des mots de passe
     const validPassword = await bcrypt.compare(password, user.password);
+    console.log('password:', password)
+    console.log('userPassword:', user.password)
+    console.log('validPassword:', validPassword)
     if (!validPassword) {
       return res.status(401).json({ error: "Utilisateur ou mot de passe incorrect." });
     }
