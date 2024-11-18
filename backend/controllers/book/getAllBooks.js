@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Book = require("../../Models/book");
+const Book = require("../../models/book");
 
 exports.getAllBooks = async (req, res, next) => {
   try {

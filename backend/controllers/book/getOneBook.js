@@ -1,4 +1,4 @@
-const Book = require('../models/book');
+const Book = require('../../models/book');
 
 // récupérer un livre spécifique
 exports.getOneBook = async (req, res, next) => {

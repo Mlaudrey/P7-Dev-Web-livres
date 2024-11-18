@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const thingSchema = mongoose.Schema({
+const bookSchema = mongoose.Schema({
     // schéma de données pour les livres
     userId: { 
         type: mongoose.Schema.Types.ObjectId,
-        ref: "user", 
+        ref: "User",  // utilise "User" en majuscule car c'est le modèle de l'utilisateur
         required: true 
     },
     title: { 
@@ -32,7 +32,7 @@ const thingSchema = mongoose.Schema({
         { 
             userId: { 
                 type: mongoose.Schema.Types.ObjectId, 
-                ref: "user", 
+                ref: "User",  
                 required: true 
             },
             grade: { 
@@ -46,21 +46,22 @@ const thingSchema = mongoose.Schema({
     // calcul de la moyenne des notes
     averageRating: { 
         type: Number, 
-        required: false  
+        required: false,
+        default: 0  // ajoute une valeur par défaut (0) si aucune note n'est présente
     }
 });
 
 // méthode pour recalculer la moyenne à chaque fois qu'une note est ajoutée
-thingSchema.methods.calculateAverageRating = function() {
+bookSchema.methods.calculateAverageRating = function() {
     if (this.rating.length === 0) return 0; // pas de notes => moyenne = 0
     const total = this.rating.reduce((acc, rating) => acc + rating.grade, 0);
     return total / this.rating.length;
 };
 
 // ajout d'un middleware `pre-save` pour recalculer `averageRating` avant chaque enregistrement
-thingSchema.pre('save', function(next) {
-    this.averageRating = this.calculateAverageRating();
+bookSchema.pre('save', function(next) {
+    this.averageRating = this.calculateAverageRating();  // Assurez-vous que c'est `bookSchema`
     next();
 });
 
-module.exports = mongoose.model('Book', thingSchema);
+module.exports = mongoose.model('Book', bookSchema);

@@ -1,5 +1,5 @@
-const Book = require('../models/book');
-const { processImage } = require('../middleware/multer-config');
+const Book = require('../../models/book');
+const { processImage } = require('../../middleware/multer-config');
 
 exports.createBook = async (req, res) => {
   try {

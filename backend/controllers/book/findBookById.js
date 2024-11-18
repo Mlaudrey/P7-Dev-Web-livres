@@ -1,4 +1,4 @@
-const Book = require('../models/book');
+const Book = require('../../models/book');
 
 // fonction pour chercher un livre par son ID
 exports.findBookById = async (id) => {

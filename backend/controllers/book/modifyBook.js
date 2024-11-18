@@ -1,5 +1,5 @@
-const Book = require('../models/book');
-const { findBookById } = require('../services/findBookById'); // Assurez-vous que la fonction est bien exportée
+const Book = require('../../models/book');
+const { findBookById } = require('../../services/findBookById'); 
 
 // modifier un livre
 exports.modifyBook = async (req, res, next) => {
