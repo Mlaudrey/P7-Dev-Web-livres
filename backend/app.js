@@ -10,8 +10,7 @@ const bookRoutes = require('./routes/book.js');
 const userRoutes = require('./routes/user.js');  
 
 // j'utilise la variable d'environnement MONGODB_URI pour se connecter à MongoDB
-mongoose.connect(process.env.MONGODB_URI, 
-    { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
