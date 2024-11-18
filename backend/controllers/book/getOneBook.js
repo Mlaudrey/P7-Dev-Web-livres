@@ -3,7 +3,8 @@ const Book = require('../../models/book');
 // récupérer un livre spécifique
 exports.getOneBook = async (req, res, next) => {
   try {
-    const book = await Book.findOne({ _id: req.params.id });
+    // recherche du livre par son identifiant
+    const book = await Book.findById(req.params.id);
 
     // si le livre n'est pas trouvé
     if (!book) {
@@ -13,7 +14,8 @@ exports.getOneBook = async (req, res, next) => {
     // si le livre est trouvé, le renvoyer avec un code 200
     res.status(200).json(book);
   } catch (error) {
-    
-    res.status(500).json({ error: 'Erreur lors de la récupération du livre', details: error.message });
+    // gestion des erreurs serveur
+    console.error('Erreur lors de la récupération du livre:', error.message);
+    res.status(500).json({ error: 'Erreur lors de la récupération du livre' });
   }
 };
