@@ -87,7 +87,7 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET || 'RANDOM_TOKEN_SECRET', { expiresIn: '24h' });
     console.log(`Connexion réussie pour l'utilisateur : ${email}`);
 
-    // Réponse avec le token JWT et l'ID de l'utilisateur
+    // réponse avec le token JWT et l'ID de l'utilisateur
     return res.status(200).json({
       userId: user._id,
       token,

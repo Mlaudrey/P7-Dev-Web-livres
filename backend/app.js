@@ -10,7 +10,8 @@ const bookRoutes = require('./routes/book.js');
 const userRoutes = require('./routes/user.js');  
 
 // j'utilise la variable d'environnement MONGODB_URI pour se connecter à MongoDB
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI, 
+    { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
@@ -28,20 +29,12 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 // routes pour les livres 
-app.use('/api/books', bookRoutes);
-
+app.use('/api/book', bookRoutes);
 // routes pour l'authentification des utilisateurs
 app.use('/api/auth', userRoutes);
 
 // route pour servir les fichiers d'images statiques
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-// middleware global de gestion des erreurs
-app.use((error, req, res, next) => {
-  console.error(error.stack); 
-  res.status(error.status || 500).json({
-    message: error.message || 'Une erreur serveur est survenue'
-  });
-});
 
 module.exports = app;

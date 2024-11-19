@@ -4,7 +4,7 @@ require('dotenv').config();
 const cors = require('cors');
 app.use(cors());
 
-const normalizePort = val => {
+const normalizePort = (val) => {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -18,7 +18,7 @@ const normalizePort = val => {
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-const errorHandler = error => {
+const errorHandler = (error) => {
   console.log('error:',error)
   if (error.syscall !== 'listen') {
     throw error;
