@@ -14,7 +14,7 @@ userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next(); // Si le mot de passe n'est pas modifié, ne rien faire
 
   try {
-    const salt = await bcrypt.genSalt(10);  // Générer un salt pour rendre le hachage plus sécurisé
+   const salt = await bcrypt.genSalt(10);  // Générer un salt pour rendre le hachage plus sécurisé
     this.password = await bcrypt.hash(this.password, 10);  // Hacher le mot de passe avec le salt
     next();
   } catch (err) {
