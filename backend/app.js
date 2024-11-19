@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 // routes pour les livres 
-app.use('/api/book', bookRoutes);
+app.use('/api/books', bookRoutes);
 // routes pour l'authentification des utilisateurs
 app.use('/api/auth', userRoutes);
 

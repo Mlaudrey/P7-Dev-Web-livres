@@ -31,6 +31,8 @@ exports.createBook = async (req, res) => {
     });
 
     await book.save(); // enregistre le livre dans MongoDB
+    console.log('book:', book);
+    console.log('res:', res);
     return res.status(201).json({
       message: 'Livre créé avec succès !',
       bookId: book._id,  // renvoie l'ID du livre créé

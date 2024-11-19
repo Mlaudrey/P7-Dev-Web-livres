@@ -40,12 +40,9 @@ exports.signup = async (req, res) => {
   }
 
   try {
-    // 3. Hachage du mot de passe
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log('Mot de passe haché:', hashedPassword);
 
-    // 4. Création d'un utilisateur
-    const user = new User({ email, password: hashedPassword });
+    // 3. Création d'un utilisateur
+    const user = new User({ email, password : password});
     await user.save();
     return res.status(201).json({ message: "Utilisateur créé avec succès !" });
 

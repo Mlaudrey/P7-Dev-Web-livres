@@ -40,13 +40,13 @@ const processImage = async (fileBuffer, originalName) => {
 
     const timestamp = Date.now();
     const extension = 'webp';
-    const safeName = slugify(originalName); // Utilisation de slugify pour un nom plus sûr
+    const safeName = slugify(originalName); 
     const newFilename = `${safeName}_${timestamp}.${extension}`;
     const outputPath = path.join(imagesDir, newFilename);
 
     // Utilisation de Sharp pour redimensionner l'image et la convertir en WebP avec une qualité de 80
     await sharp(fileBuffer)
-      .resize(800, 800, { fit: sharp.fit.inside }) // Redimensionne l'image à une taille maximale de 800x800
+      .resize(800, 800, { fit: sharp.fit.inside }) 
       .webp({ quality: 80 })
       .toFile(outputPath);
 
