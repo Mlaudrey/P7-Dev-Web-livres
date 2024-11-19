@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { upload, processImage } = require('../middleware/multerconfig'); // Import du fichier multerconfig
+const { upload, processImage } = require('../middleware/multer-config'); // Import du fichier multerconfig
 
 // route POST pour uploader une image
 router.post('/upload', upload, async (req, res) => {

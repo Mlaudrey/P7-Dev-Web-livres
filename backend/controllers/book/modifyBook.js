@@ -1,5 +1,5 @@
 const Book = require('../../models/book');
-const { findBookById } = require('../../services/findBookById');
+const { findBookById } = require('../../controllers/book/findBookById');
 
 // modifier un livre
 exports.modifyBook = async (req, res, next) => {

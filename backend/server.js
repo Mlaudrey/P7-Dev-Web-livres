@@ -2,11 +2,8 @@ const http = require('http');
 const app = require('./app');
 require('dotenv').config();
 const cors = require('cors');
-const imageRoutes = require('./routes/image'); 
 
 app.use(cors());
-
-app.use('/api/images', imageRoutes);
 
 const normalizePort = (val) => {
   const port = parseInt(val, 10);

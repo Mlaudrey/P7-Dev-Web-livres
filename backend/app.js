@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 
+
 // je charge les variables d'environnement depuis le fichier .env
 require('dotenv').config(); 
 
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGODB_URI,
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
+
 
 // middleware pour les en-têtes CORS
 app.use((req, res, next) => {

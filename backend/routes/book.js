@@ -1,10 +1,8 @@
 const express = require('express');
-const auth = require('../middleware/auth');  
-const { upload } = require('../middleware/multer-config');
-const uploadRoutes = require('./routes/upload');
+const auth = require('../middleware/auth.js');  
+const { upload } = require('../middleware/multer-config.js');
   
 const router = express.Router();
-app.use('/api', uploadRoutes);
 
 const { createBook } = require('../controllers/book/createBook');
 const { deleteBook } = require('../controllers/book/deleteBook');
