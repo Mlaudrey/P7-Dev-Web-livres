@@ -5,7 +5,7 @@ exports.getAllBooks = async (req, res, next) => {
   try {
    
     const books = await Book.find({});
-
+    console.log('Livres trouvés dans la base de données :', books);
     // retourne la liste des livres avec un code 200
     res.status(200).json(books);
   } catch (error) {
