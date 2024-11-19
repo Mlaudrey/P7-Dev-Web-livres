@@ -1,7 +1,7 @@
 const Book = require('../../models/book');
 
 // fonction pour mettre à jour la note moyenne d'un livre
-exports.updateAverageRating = async (bookId) => {
+exports.updateBestrating = async (bookId) => {
   try {
     const book = await Book.findById(bookId);
     
@@ -21,7 +21,7 @@ exports.updateAverageRating = async (bookId) => {
 };
 
 // fonction pour obtenir la note moyenne d'un livre spécifique
-exports.getAverageRating = async (req, res) => {
+exports.getBestrating = async (req, res) => {
   const { id } = req.params;
 
   try {
