@@ -30,12 +30,7 @@ const processImage = async (fileBuffer, originalName) => {
 
     // Créer le dossier images s'il n'existe pas
     if (!fs.existsSync(imagesDir)) {
-      try {
-        fs.mkdirSync(imagesDir, { recursive: true });
-      } catch (error) {
-        console.error('Erreur lors de la création du dossier images:', error);
-        throw new Error('Impossible de créer le dossier images');
-      }
+      fs.mkdirSync(imagesDir, { recursive: true });
     }
 
     const timestamp = Date.now();
@@ -44,23 +39,19 @@ const processImage = async (fileBuffer, originalName) => {
     const newFilename = `${safeName}_${timestamp}.${extension}`;
     const outputPath = path.join(imagesDir, newFilename);
 
-    // Utilisation de Sharp pour redimensionner l'image et la convertir en WebP avec une qualité de 80
     await sharp(fileBuffer)
       .resize(800, 800, { fit: sharp.fit.inside }) 
       .webp({ quality: 80 })
       .toFile(outputPath);
 
-    // Suppression du fichier original après optimisation
-    fileBuffer = null;
-
-    // Retourne l'URL de l'image optimisée
-    return `${outputPath}`;
-
+    // Retourne seulement le nom du fichier pour le chemin public
+    return newFilename;
   } catch (error) {
     console.error('Erreur lors du traitement de l\'image :', error.message);
     throw new Error('Erreur lors du traitement de l\'image');
   }
 };
+
 
 // Export des fonctionnalités : upload et traitement d'image
 module.exports = {

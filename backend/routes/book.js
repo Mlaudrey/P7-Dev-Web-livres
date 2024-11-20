@@ -12,8 +12,8 @@ const { getOneBook } = require('../controllers/book/getOneBook');
 const { getBestrating } = require('../controllers/book/bestrating');
 const { rating } = require ('../controllers/book/rating.js');
 
-router.get('/api/books', getAllBooks);
-router.post('/api/books', auth, upload, createBook);
+router.get('/', getAllBooks);
+router.post('/', auth, upload, createBook);
 router.get('/:id', auth, getOneBook);
 router.put('/:id', auth, upload, modifyBook);
 router.delete('/:id', auth, deleteBook);
