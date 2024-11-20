@@ -1,5 +1,5 @@
 const Book = require('../../models/book');
-const { findBookById } = require('../../controllers/book/findBookById');
+const { getOneBook } = require('./getOneBook');
 
 // modifier un livre
 exports.modifyBook = async (req, res, next) => {
@@ -16,7 +16,7 @@ exports.modifyBook = async (req, res, next) => {
     delete bookObject._userId;
 
     // Chercher le livre à modifier
-    const book = await findBookById(req.params.id);
+    const book = await getOneBook(req.params.id);
 
     // vérifie si l'utilisateur qui tente de modifier le livre est bien le propriétaire
     if (book.userId.toString() !== req.auth.userId) {  // utilisation de toString() pour comparer les ObjectId

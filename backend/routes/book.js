@@ -14,7 +14,7 @@ const { rating } = require ('../controllers/book/rating.js');
 
 router.get('/', getAllBooks);
 router.post('/', auth, upload, createBook);
-router.get('/:id', auth, getOneBook);
+router.get('/:id', getOneBook);
 router.put('/:id', auth, upload, modifyBook);
 router.delete('/:id', auth, deleteBook);
 router.get('/:id/bestrating', getBestrating);

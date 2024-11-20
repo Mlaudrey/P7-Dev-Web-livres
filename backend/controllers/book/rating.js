@@ -10,6 +10,7 @@ exports.rating = async (req, res) => {
       return res.status(400).json({ error: 'La note doit être comprise entre 0 et 5.' });
     }
 
+    console.log(req.params.id);
     // trouve le livre par son ID
     const book = await Book.findById(req.params.id);
     if (!book) {
@@ -22,11 +23,13 @@ exports.rating = async (req, res) => {
       return res.status(400).json({ error: 'Vous avez déjà noté ce livre.' });
     }
 
-    book.ratings.push({ userId, rating });
+    book.ratings.push({ userId, grade: rating });
 
     // calcule la nouvelle note moyenne
-    const totalRatings = book.ratings.reduce((acc, curr) => acc + curr.rating, 0);
-    const averageRating = totalRatings / book.ratings.length;
+    const totalRatings = book.ratings.reduce((acc, curr) => {
+      return acc + (curr.grade || 0); // Utilisez curr.grade au lieu de curr.rating
+    }, 0);
+    const averageRating = book.ratings.length ? totalRatings / book.ratings.length : 0;
 
     // mettre à jour la note moyenne du livre
     book.averageRating = averageRating;

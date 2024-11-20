@@ -92,6 +92,9 @@ export async function deleteBook(id) {
 }
 
 export async function rateBook(id, userId, rating) {
+  console.log(id);
+  console.log(userId);
+  console.log(rating);
   const data = {
     userId,
     rating: parseInt(rating, 10),
@@ -103,7 +106,9 @@ export async function rateBook(id, userId, rating) {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
+    console.log(response);
     const book = response.data;
+    console.log(book);
     // eslint-disable-next-line no-underscore-dangle
     book.id = book._id;
     return book;

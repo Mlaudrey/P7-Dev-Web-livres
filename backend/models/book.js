@@ -27,7 +27,7 @@ const bookSchema = mongoose.Schema({
         required: true 
     },
     // champ `rating`, qui est un tableau d'objets contenant `userId` et `grade`
-    rating: [
+    ratings: [
         { 
             userId: { 
                 type: String, 

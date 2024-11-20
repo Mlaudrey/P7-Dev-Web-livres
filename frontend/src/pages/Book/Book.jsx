@@ -23,11 +23,15 @@ function Book() {
   useEffect(() => {
     async function getItem() {
       const data = await getBook(params.id);
-      if (data) {
+      if (data && data.id) {
         setBook(data);
       }
     }
-    getItem();
+    if (params.id) {
+      getItem();
+    } else {
+      console.log('id non trouvé');
+    }
   }, [params.id]);
 
   useEffect(() => {
@@ -80,14 +84,16 @@ function Book() {
             </div>
           ) : null}
           <BookInfo book={book} />
-          <BookRatingForm
-            userRated={userRated}
-            userId={connectedUser?.userId}
-            rating={rating}
-            setRating={setRating}
-            setBook={setBook}
-            id={book.id}
-          />
+          {book.id && (
+            <BookRatingForm
+              userRated={userRated}
+              userId={connectedUser?.userId}
+              rating={rating}
+              setRating={setRating}
+              setBook={setBook}
+              id={book?.id || ''}
+            />
+          )}
         </div>
       </div>
       <hr />
