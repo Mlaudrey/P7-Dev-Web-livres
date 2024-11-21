@@ -1,7 +1,7 @@
 const Book = require('../../models/book');
 
 // récupérer un livre spécifique
-exports.getOneBook = async (req, res, next) => {
+module.exports = async (req, res,) => {
   try {
     // recherche du livre par son identifiant
     const book = await Book.findById(req.params.id);

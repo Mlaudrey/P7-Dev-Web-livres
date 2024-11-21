@@ -1,7 +1,7 @@
 const Book = require('../../models/book');
 const { processImage } = require('../../middleware/multer-config');
 
-exports.createBook = async (req, res, next) => {
+module.exports = async (req, res, next) => {
   try {
     if (!req.body.book) {
       return res.status(400).json({ error: 'Les données du livre sont requises' });

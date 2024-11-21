@@ -1,7 +1,7 @@
 const Book = require('../../models/book'); 
 
 // fonction pour attribuer une note à un livre
-exports.rating = async (req, res) => {
+module.exports = async (req, res) => {
   try {
     const { userId, rating } = req.body; 
 

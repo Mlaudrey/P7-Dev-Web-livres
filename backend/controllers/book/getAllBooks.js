@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Book = require("../../models/book");
 
-exports.getAllBooks = async (req, res, next) => {
+module.exports = async (req, res, next) => {
   try {
    
     const books = await Book.find({});

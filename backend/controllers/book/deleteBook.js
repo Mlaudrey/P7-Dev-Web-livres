@@ -2,7 +2,7 @@ const Book = require('../../models/book');
 const fs = require('fs');
 const path = require('path');
 
-exports.deleteBook = async (req, res) => {
+module.exports = async (req, res, next) => {
   try {
     // trouver le livre par ID
     const book = await Book.findOne({ _id: req.params.id });

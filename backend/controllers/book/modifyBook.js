@@ -2,7 +2,7 @@ const Book = require('../../models/book');
 const { getOneBook } = require('./getOneBook');
 
 // modifier un livre
-exports.modifyBook = async (req, res, next) => {
+module.exports = async (req, res, next) => {
   try {
     // créer l'objet bookObject en prenant en compte l'image si elle est fournie
     const bookObject = req.file
