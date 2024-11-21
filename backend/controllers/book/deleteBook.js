@@ -18,11 +18,13 @@ module.exports = async (req, res, next) => {
 
     // supprimer l'image associée au livre
     const filename = book.imageUrl.split('/images/')[1];
-    const imagePath = path.join(__dirname, '../images', filename);
+    const imagePath = path.join(__dirname, '../../images', filename);
+
 
     // supprimer l'image et ensuite supprimer le livre de la base de données
     try {
       await fs.promises.unlink(imagePath);  // suppression de l'image
+      console.log('Image supprimée avec succès.');
     } catch (error) {
       console.error('Erreur lors de la suppression de l\'image :', error.message);
       // vous pouvez décider de continuer à supprimer le livre même si l'image est introuvable ou renvoyer une erreur selon le cas
