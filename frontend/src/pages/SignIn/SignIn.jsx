@@ -40,8 +40,17 @@ function SignIn({ setUser }) {
       }
     } catch (err) {
       console.log(err);
-      setNotification({ error: true, message: err.message });
-      console.log('Some error occured during signing in: ', err);
+      if (err.response && err.response.status === 401) {
+        setNotification({
+          error: true,
+          message: 'Adresse email ou mot de passe incorrect',
+        });
+      } else {
+        // Message générique pour d'autres erreurs
+        setNotification({ error: true, message: 'Une erreur est survenue' });
+      }
+
+      console.log('Some error occurred during signing in: ', err);
     } finally {
       setIsLoading(false);
     }
@@ -64,8 +73,23 @@ function SignIn({ setUser }) {
       }
       setNotification({ error: false, message: 'Votre compte a bien été créé, vous pouvez vous connecter' });
     } catch (err) {
-      setNotification({ error: true, message: err.message });
-      console.log('Some error occured during signing up: ', err);
+      if (err.response && err.response.status === 400) {
+        setNotification({
+          error: true,
+          message: 'Une erreur est survenue. Veuillez réessayer.',
+        });
+      } else if (err.response && err.response.status === 401) {
+        // Autres erreurs, comme une mauvaise requête
+        setNotification({
+          error: true,
+          message: 'Une erreur est survenue. Veuillez réessayer.',
+        });
+      } else {
+        // Message générique pour d'autres erreurs
+        setNotification({ error: true, message: 'Une erreur est survenue' });
+      }
+
+      console.log('Some error occurred during signing up: ', err);
     } finally {
       setIsLoading(false);
     }
