@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  BrowserRouter, Route, Routes,
+  BrowserRouter, Route, Routes, useLocation,
 } from 'react-router-dom';
 import SignIn from './pages/SignIn/SignIn';
 import Home from './pages/Home/Home';
@@ -16,6 +16,7 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 function App() {
   const [user, setUser] = useState(null);
   const { connectedUser } = useUser();
+  const location = useLocation();
 
   useEffect(() => {
     setUser(connectedUser);
@@ -24,7 +25,7 @@ function App() {
     <BrowserRouter>
       <div>
         <ScrollToTop />
-        <Header user={user} setUser={setUser} />
+        {location.pathname === APP_ROUTES.SIGN_IN ? null : <Header user={user} setUser={setUser} />}
         <Routes>
           <Route index element={<Home />} />
           <Route path={APP_ROUTES.SIGN_IN} element={<SignIn setUser={setUser} />} />
@@ -32,7 +33,7 @@ function App() {
           <Route path={APP_ROUTES.UPDATE_BOOK} element={<UpdateBook />} />
           <Route path={APP_ROUTES.ADD_BOOK} element={<AddBook />} />
         </Routes>
-        <Footer />
+        {location.pathname === APP_ROUTES.SIGN_IN ? null : <Footer />}
       </div>
     </BrowserRouter>
   );
