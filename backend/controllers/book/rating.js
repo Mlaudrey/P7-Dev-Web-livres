@@ -27,12 +27,12 @@ module.exports = async (req, res) => {
 
     // calcule la nouvelle note moyenne
     const totalRatings = book.ratings.reduce((acc, curr) => {
-      return acc + (curr.grade || 0); // Utilisez curr.grade au lieu de curr.rating
+      return acc + (curr.grade || 0); 
     }, 0);
     const averageRating = book.ratings.length ? totalRatings / book.ratings.length : 0;
-
-    // mettre à jour la note moyenne du livre
-    book.averageRating = averageRating;
+    
+    //note moyenne  1 chiffre après la virgule
+    book.averageRating = parseFloat(averageRating.toFixed(1));
 
     // sauvegarde les modifications dans la base de données
     await book.save();
