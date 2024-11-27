@@ -18,8 +18,7 @@ module.exports = async (req, res) => {
     }
 
     // vérifie si l'utilisateur a déjà noté ce livre
-    const existingRating = book.ratings.find(r => r.userId.toString() === userId);
-    if (existingRating) {
+    if (book.ratings && book.ratings.includes(userId)) {
       return res.status(400).json({ error: 'Vous avez déjà noté ce livre.' });
     }
 
@@ -36,7 +35,7 @@ module.exports = async (req, res) => {
 
     // sauvegarde les modifications dans la base de données
     await book.save();
-
+    
     // retourne la réponse avec le livre mis à jour
     res.status(200).json(book);
   } catch (error) {
