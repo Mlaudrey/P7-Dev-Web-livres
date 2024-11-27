@@ -76,7 +76,7 @@ function Book() {
             <div className={styles.Owner}>
               <p>Vous avez publié cet ouvrage, vous pouvez le :</p>
               <p>
-                <Link to={`/livre/modifier/${book.id}`}>modifier</Link>
+                <Link to={`/book/modify/${book.id}`}>modifier</Link>
                 {' '}
                 <span tabIndex={0} role="button" onKeyUp={onDelete} onClick={onDelete}>supprimer</span>
                 {' '}
