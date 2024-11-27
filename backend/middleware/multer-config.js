@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const slugify = require('slugify');
 
+//middleware de gestion des fichiers
 // Configuration de multer avec MemoryStorage pour stocker les fichiers en mémoire
 const storage = multer.memoryStorage();
 

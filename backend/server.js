@@ -1,52 +1,29 @@
-const http = require('http');
+const express = require('express');
 const app = require('./app');
 require('dotenv').config();
-const cors = require('cors');
 
-app.use(cors());
 
-const normalizePort = (val) => {
-  const port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    return val;
-  }
-  if (port >= 0) {
-    return port;
-  }
-  return false;
-};
-const port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+const port = process.env.PORT || '3000';
 
 const errorHandler = (error) => {
-  console.log('error:',error)
   if (error.syscall !== 'listen') {
     throw error;
   }
-  const address = server.address();
-  const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
+  const bind = typeof port === 'string' ? 'pipe ' + port : 'Port: ' + port;
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges.');
+      console.error(bind + ' nécessite des privilèges élevés.');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use.');
+      console.error(bind + ' est déjà utilisé.');
       process.exit(1);
       break;
     default:
       throw error;
   }
 };
-
-const server = http.createServer(app);
-
-server.on('error', errorHandler);
-server.on('listening', () => {
-  const address = server.address();
-  const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
-  console.log('Listening on ' + bind);
-});
-
-server.listen(port);
+//démarrage du server et écoute sur le port spécifié
+app.listen(port, () => {
+  console.log(`Le serveur écoute sur le port ${port}`);
+}).on ('error', errorHandler);
