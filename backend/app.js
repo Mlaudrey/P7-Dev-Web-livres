@@ -23,19 +23,14 @@ mongoose
 
 // middleware pour parser le corps des requêtes en JSON
 app.use(express.json());
+
  
 // routes pour les livres (operation CRUD)
-app.use("/api/books", bookRoutes);
+app.use("/books", bookRoutes);
 // routes pour l'authentification des utilisateurs(CRUD)
-app.use("/api/auth", userRoutes);
+app.use("/auth", userRoutes);
 
 // route pour servir les fichiers d'images statique, images téléchargés par les utilisateurs
 app.use("/images", express.static(path.join(__dirname, "images")));
-
-app.use((req, res) => {
-    const error = new Error('Page non trouvée');
-    error.status = 404;
-    next(error);
-});
 
 module.exports = app;
